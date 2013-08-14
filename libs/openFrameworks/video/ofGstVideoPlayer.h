@@ -54,7 +54,9 @@ public:
 	float 			getHeight();
 	float 			getWidth();
 
-	void setFrameByFrame(bool frameByFrame);
+	void setPlaybackMode(ofVideoPlaybackMode playbackMode);
+	ofVideoPlaybackMode getPlaybackMode();
+
 	void setThreadAppSink(bool threaded);
 
 	ofGstVideoUtils * getGstVideoUtils();

@@ -844,6 +844,14 @@ float ofGstVideoGrabber::getWidth(){
 	return videoUtils.getWidth();
 }
 
+void ofGstVideoGrabber::setPlaybackMode(ofVideoPlaybackMode playbackMode){
+	videoUtils.setPlaybackMode(playbackMode);
+}
+
+ofVideoPlaybackMode ofGstVideoGrabber::getPlaybackMode(){
+	return videoUtils.getPlaybackMode();
+}
+
 void ofGstVideoGrabber::close(){
 	videoUtils.close();
 }

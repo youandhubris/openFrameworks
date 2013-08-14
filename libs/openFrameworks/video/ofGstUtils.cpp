@@ -708,6 +708,18 @@ void ofGstVideoUtils::close(){
 	buffer = 0;
 }
 
+void ofGstVideoUtils::setPlaybackMode(ofVideoPlaybackMode playbackMode){
+	setFrameByFrame(playbackMode == OF_VIDEO_PLAYBACK_FRAME_BY_FRAME);
+}
+
+ofVideoPlaybackMode ofGstVideoUtils::getPlaybackMode(){
+	if(isFrameByFrame()){
+		return OF_VIDEO_PLAYBACK_FRAME_BY_FRAME;
+	}else{
+		return OF_VIDEO_PLAYBACK_ASYNCHRONOUS;
+	}
+}
+
 bool ofGstVideoUtils::isFrameNew(){
 	return bIsFrameNew;
 }

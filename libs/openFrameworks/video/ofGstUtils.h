@@ -140,6 +140,9 @@ public:
 
 	void 			close();
 
+	void setPlaybackMode(ofVideoPlaybackMode playbackMode);
+	ofVideoPlaybackMode getPlaybackMode();
+
 	// this events happen in a different thread
 	// do not use them for opengl stuff
 	ofEvent<ofPixels> prerollEvent;

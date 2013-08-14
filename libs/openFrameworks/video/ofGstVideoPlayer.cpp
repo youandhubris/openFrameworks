@@ -372,6 +372,10 @@ ofGstVideoUtils * ofGstVideoPlayer::getGstVideoUtils(){
 	return &videoUtils;
 }
 
-void ofGstVideoPlayer::setFrameByFrame(bool frameByFrame){
-	videoUtils.setFrameByFrame(frameByFrame);
+void ofGstVideoPlayer::setPlaybackMode(ofVideoPlaybackMode playbackMode){
+	videoUtils.setPlaybackMode(playbackMode);
+}
+
+ofVideoPlaybackMode ofGstVideoPlayer::getPlaybackMode(){
+	return videoUtils.getPlaybackMode();
 }
