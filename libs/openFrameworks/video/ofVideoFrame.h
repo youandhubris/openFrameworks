@@ -19,6 +19,7 @@ class ofBaseVideoFrame;
 
 class ofVideoFrame{
 public:
+	ofVideoFrame();
 	ofVideoFrame(ofBaseVideoFrame * nativeFrame);
 	ofVideoFrame(const ofVideoFrame & mom);
 	virtual ~ofVideoFrame();

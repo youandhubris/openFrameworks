@@ -19,9 +19,18 @@
 
 ofGstVideoFrame::ofGstVideoFrame()
 :sample(NULL)
+,width(0)
+,height(0)
+,pixelFormat(OF_PIXELS_RGB)
 {
 	GstMapInfo initMapinfo		= {0,};
 	mapinfo 					= initMapinfo;
+}
+
+void ofGstVideoFrame::setCaps(int _width, int _height, ofPixelFormat _pixelFormat){
+	width = _width;
+	height = _height;
+	pixelFormat = _pixelFormat;
 }
 
 ofGstVideoFrame::ofGstVideoFrame(GstSample* sample){
@@ -40,12 +49,7 @@ void ofGstVideoFrame::setGstSample(GstSample * _sample){
 
 	//guint size = mapinfo.size;
 
-	const GstStructure * videoInfo = gst_sample_get_info(sample);
-
-	guint width, height;
-	gst_structure_get_uint(videoInfo,"width",&width);
-	gst_structure_get_uint(videoInfo,"width",&height);
-
+	// FIXME: channels to pixelformat
 	pixels.setFromExternalPixels(mapinfo.data,width,height,3);
 
 	gst_buffer_unmap(buffer,&mapinfo);
@@ -760,11 +764,11 @@ void ofGstVideoUtils::update(){
 				bHavePixelsChanged = bBackPixelsChanged;
 				if (bHavePixelsChanged){
 					frontFrame = backFrame;
+					bBackPixelsChanged = false;
 				}
 
 			mutex.unlock();
 		}else{
-			GstBuffer *buffer;
 			GstSample * sample;
 
 			//get the buffer from appsink
@@ -817,19 +821,21 @@ bool ofGstVideoUtils::setPipeline(string pipeline, int bpp, bool isStream, int w
 }
 
 bool ofGstVideoUtils::allocate(int w, int h, int _bpp){
-	//FIXME: allocate video buffers?
+	frontFrame.setCaps(w,h,OF_PIXELS_RGB);
+	backFrame.setCaps(w,h,OF_PIXELS_RGB);
+	bIsAllocated = true;
 
-	bHavePixelsChanged = true;//pixels.isAllocated();
-	return true;//pixels.isAllocated();
+	bHavePixelsChanged = bIsAllocated;
+	return bIsAllocated;
 }
 
 GstFlowReturn ofGstVideoUtils::preroll_cb(GstSample * sample){
 	mutex.lock();
-	if(true){ // FIXME: check pixels allocated
+	if(bIsAllocated){
 		backFrame.setGstSample(sample);
 		bBackPixelsChanged=true;
 		mutex.unlock();
-		// FIXME: ofNotifyEvent(prerollEvent,backFrame);
+		//ofNotifyEvent(prerollEvent,backFrame);
 	}else{
 		if(isStream && appsink){
 			appsink->on_stream_prepared();
@@ -845,7 +851,7 @@ GstFlowReturn ofGstVideoUtils::preroll_cb(GstSample * sample){
 GstFlowReturn ofGstVideoUtils::buffer_cb(GstSample * sample){
 	mutex.lock();
 
-	if(true){ // FIXME: allocated?
+	if(bIsAllocated){
 		backFrame.setGstSample(sample);
 		bBackPixelsChanged=true;
 		mutex.unlock();

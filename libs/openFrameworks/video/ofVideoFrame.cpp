@@ -6,6 +6,13 @@
  */
 
 #include "ofVideoFrame.h"
+#include "ofConstants.h"
+
+ofVideoFrame::ofVideoFrame()
+:nativeFrame(NULL)
+{
+
+}
 
 ofVideoFrame::ofVideoFrame(ofBaseVideoFrame * nativeFrame)
 :nativeFrame(nativeFrame)

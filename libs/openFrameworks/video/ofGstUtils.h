@@ -32,6 +32,8 @@ public:
 	ofGstVideoFrame(GstSample * sample);
 	void setGstSample(GstSample * sample);
 
+	void setCaps(int _width, int _height, ofPixelFormat _pixelFormat);
+
 	ofPixels & getPixels();
 	ofTexture & getTexture();
 
@@ -46,6 +48,10 @@ private:
 	ofPixels pixels;
 	ofTexture texture;
 	GstMapInfo mapinfo;
+
+	int width;
+	int height;
+	ofPixelFormat pixelFormat;
 };
 
 
@@ -192,6 +198,7 @@ private:
 	bool			bHavePixelsChanged;
 	bool			bBackPixelsChanged;
 	ofMutex			mutex;
+	bool			bIsAllocated;
 };
 
 
