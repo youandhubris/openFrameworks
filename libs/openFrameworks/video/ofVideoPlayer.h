@@ -31,11 +31,6 @@
 #endif
 
 
-enum ofVideoPlaybackMode{
-	OF_VIDEO_PLAYBACK_ASYNCHRONOUS,
-	OF_VIDEO_PLAYBACK_FRAME_BY_FRAME
-};
-
 //---------------------------------------------
 class ofVideoPlayer : public ofBaseVideoPlayer,public ofBaseVideoDraws{
 
