@@ -852,6 +852,10 @@ ofVideoPlaybackMode ofGstVideoGrabber::getPlaybackMode(){
 	return videoUtils.getPlaybackMode();
 }
 
+void ofGstVideoGrabber::setUsePixels(bool usePixels){
+	//FIXME: look into vaapi and add posibility of texture only
+}
+
 void ofGstVideoGrabber::close(){
 	videoUtils.close();
 }

@@ -335,6 +335,13 @@ void ofVideoPlayer::setUseTexture(bool bUse){
 }
 
 //----------------------------------------------------------
+void ofVideoPlayer::setUsePixels(bool bUse){
+	if( player != NULL ){
+		player->setUsePixels(bUse);
+	}
+}
+
+//----------------------------------------------------------
 void ofVideoPlayer::setAnchorPercent(float xPct, float yPct){
 	getTextureReference().setAnchorPercent(xPct, yPct);
 }

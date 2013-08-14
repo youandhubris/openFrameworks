@@ -720,6 +720,10 @@ ofVideoPlaybackMode ofGstVideoUtils::getPlaybackMode(){
 	}
 }
 
+void ofGstVideoUtils::setUsePixels(bool usePixels){
+	// FIXME: look into vaapi for texture only
+}
+
 bool ofGstVideoUtils::isFrameNew(){
 	return bIsFrameNew;
 }

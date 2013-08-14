@@ -379,3 +379,7 @@ void ofGstVideoPlayer::setPlaybackMode(ofVideoPlaybackMode playbackMode){
 ofVideoPlaybackMode ofGstVideoPlayer::getPlaybackMode(){
 	return videoUtils.getPlaybackMode();
 }
+
+void ofGstVideoPlayer::setUsePixels(bool usePixels){
+	//FIXME: look into vaapi and add posibility of texture only
+}

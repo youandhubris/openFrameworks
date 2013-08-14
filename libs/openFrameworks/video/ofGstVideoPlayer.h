@@ -57,6 +57,8 @@ public:
 	void setPlaybackMode(ofVideoPlaybackMode playbackMode);
 	ofVideoPlaybackMode getPlaybackMode();
 
+	void setUsePixels(bool usePixels);
+
 	void setThreadAppSink(bool threaded);
 
 	ofGstVideoUtils * getGstVideoUtils();

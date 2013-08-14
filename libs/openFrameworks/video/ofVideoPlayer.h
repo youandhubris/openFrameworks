@@ -71,6 +71,7 @@ class ofVideoPlayer : public ofBaseVideoPlayer,public ofBaseVideoDraws{
 
 		void 				setUseTexture(bool bUse);
 		ofTexture &			getTextureReference();
+		void 				setUsePixels(bool bUse);
 		void 				draw(float x, float y, float w, float h);
 		void 				draw(float x, float y);
 		using ofBaseDraws::draw;

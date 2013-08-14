@@ -143,6 +143,8 @@ public:
 	void setPlaybackMode(ofVideoPlaybackMode playbackMode);
 	ofVideoPlaybackMode getPlaybackMode();
 
+	void			setUsePixels(bool usePixels);
+
 	// this events happen in a different thread
 	// do not use them for opengl stuff
 	ofEvent<ofPixels> prerollEvent;

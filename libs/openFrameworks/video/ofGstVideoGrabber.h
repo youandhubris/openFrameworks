@@ -62,6 +62,8 @@ public:
 	void setPlaybackMode(ofVideoPlaybackMode playbackMode);
 	ofVideoPlaybackMode getPlaybackMode();
 
+	void setUsePixels(bool usePixels);
+
 	ofGstVideoUtils *	getGstVideoUtils();
 private:
 	ofGstVideoFormat&	selectFormat(int w, int h, int desired_framerate);
