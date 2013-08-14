@@ -8,6 +8,9 @@
 #include "ofTypes.h"
 #include "ofEvents.h"
 #include "ofThread.h"
+#include "ofVideoFrame.h"
+#include "ofTexture.h"
+
 
 #define GST_DISABLE_DEPRECATED
 #include <gst/gst.h>
@@ -17,6 +20,34 @@ class ofGstAppSink;
 typedef struct _GstElement GstElement;
 typedef struct _GstBuffer GstBuffer;
 typedef struct _GstMessage GstMessage;
+
+
+//-------------------------------------------------
+//----------------------------------------- ofGstVideoFrame
+//-------------------------------------------------
+
+class ofGstVideoFrame: public ofBaseVideoFrame{
+public:
+	ofGstVideoFrame();
+	ofGstVideoFrame(GstSample * sample);
+	void setGstSample(GstSample * sample);
+
+	ofPixels & getPixels();
+	ofTexture & getTexture();
+
+	void clear();
+
+protected:
+	void retain();
+	void release();
+
+private:
+	GstSample * sample;
+	ofPixels pixels;
+	ofTexture texture;
+	GstMapInfo mapinfo;
+};
+
 
 //-------------------------------------------------
 //----------------------------------------- ofGstUtils
@@ -63,13 +94,8 @@ public:
 	void setSinkListener(ofGstAppSink * appsink);
 
 	// callbacks to get called from gstreamer
-#if GST_VERSION_MAJOR==0
-	virtual GstFlowReturn preroll_cb(GstBuffer * buffer);
-	virtual GstFlowReturn buffer_cb(GstBuffer * buffer);
-#else
 	virtual GstFlowReturn preroll_cb(GstSample * buffer);
 	virtual GstFlowReturn buffer_cb(GstSample * buffer);
-#endif
 	virtual void 		  eos_cb();
 
 	static void startGstMainLoop();
@@ -133,6 +159,7 @@ public:
 	bool 			isFrameNew();
 	unsigned char * getPixels();
 	ofPixelsRef		getPixelsRef();
+	ofVideoFrame	getVideoFrame();
 	void 			update();
 
 	float 			getHeight();
@@ -152,30 +179,19 @@ public:
 	ofEvent<ofEventArgs> eosEvent;
 
 protected:
-#if GST_VERSION_MAJOR==0
-	GstFlowReturn preroll_cb(GstBuffer * buffer);
-	GstFlowReturn buffer_cb(GstBuffer * buffer);
-#else
 	GstFlowReturn preroll_cb(GstSample * buffer);
 	GstFlowReturn buffer_cb(GstSample * buffer);
-#endif
 	void			eos_cb();
 
 
-	ofPixels		pixels;				// 24 bit: rgb
-	ofPixels		backPixels;
-	ofPixels		eventPixels;
+	ofGstVideoFrame	backFrame;
+	ofGstVideoFrame	frontFrame;
+
 private:
 	bool			bIsFrameNew;			// if we are new
 	bool			bHavePixelsChanged;
 	bool			bBackPixelsChanged;
 	ofMutex			mutex;
-#if GST_VERSION_MAJOR==0
-	GstBuffer * 	buffer, *prevBuffer;
-#else
-	GstSample * 	buffer, *prevBuffer;
-	GstMapInfo mapinfo;
-#endif
 };
 
 
@@ -186,21 +202,13 @@ private:
 class ofGstAppSink{
 public:
 	virtual ~ofGstAppSink(){}
-#if GST_VERSION_MAJOR==0
-	virtual GstFlowReturn on_preroll(GstBuffer * buffer){
-		return GST_FLOW_OK;
-	}
-	virtual GstFlowReturn on_buffer(GstBuffer * buffer){
-		return GST_FLOW_OK;
-	}
-#else
 	virtual GstFlowReturn on_preroll(GstSample * buffer){
 		return GST_FLOW_OK;
 	}
 	virtual GstFlowReturn on_buffer(GstSample * buffer){
 		return GST_FLOW_OK;
 	}
-#endif
+
 	virtual void			on_eos(){}
 
 	// return true to set the message as attended so upstream doesn't try to process it

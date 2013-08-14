@@ -360,6 +360,10 @@ ofPixelsRef ofGstVideoPlayer::getPixelsRef(){
 	return videoUtils.getPixelsRef();
 }
 
+ofVideoFrame ofGstVideoPlayer::getVideoFrame(){
+	return videoUtils.getVideoFrame();
+}
+
 float ofGstVideoPlayer::getHeight(){
 	return videoUtils.getHeight();
 }

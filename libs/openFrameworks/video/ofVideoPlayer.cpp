@@ -101,7 +101,7 @@ ofPixelsRef ofVideoPlayer::getPixelsRef(){
 	return player->getPixelsRef();
 }
 
-ofVideoFrame & ofVideoPlayer::getVideoFrame(){
+ofVideoFrame ofVideoPlayer::getVideoFrame(){
 	if( player != NULL ){
 		return player->getVideoFrame();
 	}

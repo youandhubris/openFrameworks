@@ -50,6 +50,7 @@ public:
 
 	unsigned char * getPixels();
 	ofPixelsRef		getPixelsRef();
+	ofVideoFrame 	getVideoFrame();
 
 	float 			getHeight();
 	float 			getWidth();

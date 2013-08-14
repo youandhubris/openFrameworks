@@ -7,18 +7,35 @@
 
 #include "ofVideoFrame.h"
 
-ofVideoFrame::ofVideoFrame(ofVideoFrame& mom) {
-	mom.retain();
+ofVideoFrame::ofVideoFrame(ofBaseVideoFrame * nativeFrame)
+:nativeFrame(nativeFrame)
+{
+
+}
+
+ofVideoFrame::ofVideoFrame(const ofVideoFrame& mom)
+:nativeFrame(mom.nativeFrame)
+{
+	nativeFrame->retain();
 }
 
 ofVideoFrame::~ofVideoFrame() {
-	release();
+	nativeFrame->release();
 }
 
 ofVideoFrame & ofVideoFrame::operator=(const ofVideoFrame & mom){
 	if(&mom != this){
-		retain();
+		nativeFrame = mom.nativeFrame;
+		nativeFrame->retain();
 	}
 	return *this;
 }
 
+
+ofPixels & ofVideoFrame::getPixels(){
+	return nativeFrame->getPixels();
+}
+
+ofTexture & ofVideoFrame::getTexture(){
+	return nativeFrame->getTexture();
+}

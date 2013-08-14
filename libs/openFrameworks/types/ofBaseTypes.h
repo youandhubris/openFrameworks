@@ -188,7 +188,7 @@ public:
 	virtual void setPlaybackMode(ofVideoPlaybackMode playbackMode)=0;
 	virtual ofVideoPlaybackMode getPlaybackMode()=0;
 
-	virtual ofVideoFrame & getVideoFrame() = 0;
+	virtual ofVideoFrame getVideoFrame() = 0;
 };
 
 

@@ -8,17 +8,19 @@ void ofApp::setup(){
 	
 	//TEST LOAD MODES
 	
+	player.loadMovie("fingers.mov");
+	player.play();
 	
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
+	player.update();
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+	player.draw(0,0);
 }
 
 //--------------------------------------------------------------

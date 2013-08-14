@@ -836,6 +836,10 @@ ofPixelsRef ofGstVideoGrabber::getPixelsRef(){
 	return videoUtils.getPixelsRef();
 }
 
+ofVideoFrame ofGstVideoGrabber::getVideoFrame(){
+	return videoUtils.getVideoFrame();
+}
+
 float ofGstVideoGrabber::getHeight(){
 	return videoUtils.getHeight();
 }

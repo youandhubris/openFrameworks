@@ -170,7 +170,7 @@ ofTexture & ofVideoGrabber::getTextureReference(){
 }
 
 //---------------------------------------------------------------------------
-ofVideoFrame & ofVideoGrabber::getVideoFrame(){
+ofVideoFrame ofVideoGrabber::getVideoFrame(){
 	if(	grabber != NULL ){
 		grabber->getVideoFrame();
 	}

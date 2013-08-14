@@ -62,7 +62,7 @@ class ofVideoGrabber : public ofBaseVideoGrabber,public ofBaseVideoDraws{
 		unsigned char 	*	getPixels();
 		ofPixels&			getPixelsRef();
 		ofTexture&			getTextureReference();
-		ofVideoFrame &		getVideoFrame();
+		ofVideoFrame		getVideoFrame();
 		
 		void				setVerbose(bool bTalkToMe);
 		void				setDeviceID(int _deviceID);
