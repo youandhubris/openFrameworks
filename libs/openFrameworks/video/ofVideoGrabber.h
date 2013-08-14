@@ -59,12 +59,15 @@ class ofVideoGrabber : public ofBaseVideoGrabber,public ofBaseVideoDraws{
 		
 		void				videoSettings();
 		unsigned char 	*	getPixels();
-		ofPixelsRef			getPixelsRef();
-		ofTexture &			getTextureReference();
+		ofPixels&			getPixelsRef();
+		ofTexture&			getTextureReference();
+		
 		void				setVerbose(bool bTalkToMe);
 		void				setDeviceID(int _deviceID);
 		void				setDesiredFrameRate(int framerate);
 		void				setUseTexture(bool bUse);
+		void				setUsePixels(bool bUsePix);
+	
 		void				draw(float x, float y, float w, float h);
 		void				draw(float x, float y);
 		using ofBaseDraws::draw;
@@ -91,8 +94,8 @@ class ofVideoGrabber : public ofBaseVideoGrabber,public ofBaseVideoDraws{
 		bool bInitialized;
 		ofPtr<ofBaseVideoGrabber> grabber;
 		int RequestedDeviceID;
-		
-		bool grabberRunning; //this keeps track of whether the grabber opened sucessfully and is still open. //TODO: maybe expose this in a method? 
+
+		bool grabberRunning; //this keeps track of whether the grabber opened sucessfully and is still open. //TODO: maybe expose this in a method?
 		
 		ofPixelFormat internalPixelFormat;
 		int desiredFramerate;

@@ -154,8 +154,14 @@ unsigned char * ofVideoGrabber::getPixels(){
 }
 
 //---------------------------------------------------------------------------
-ofPixelsRef ofVideoGrabber::getPixelsRef(){
+ofPixels& ofVideoGrabber::getPixelsRef(){
 	return grabber->getPixelsRef();
+}
+
+void ofVideoGrabber::setUsePixels(bool bUsePix){
+	if(	grabber != NULL ){
+		grabber->setUsePixels(bUsePix);
+	}
 }
 
 //------------------------------------

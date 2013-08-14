@@ -182,6 +182,8 @@ public:
 	virtual bool isFrameNew()=0;
 	virtual void close()=0;
 
+	virtual void setUsePixels(bool bUsePix)=0;
+	
 	virtual void setPlaybackMode(ofVideoPlaybackMode playbackMode)=0;
 	virtual ofVideoPlaybackMode getPlaybackMode()=0;
 };

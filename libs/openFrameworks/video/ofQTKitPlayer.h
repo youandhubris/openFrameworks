@@ -95,7 +95,7 @@ class ofQTKitPlayer  : public ofBaseVideoPlayer {
 		void setPlaybackMode(ofVideoPlaybackMode playbackMode);
 		ofVideoPlaybackMode getPlaybackMode();
     
-//        void                setSynchronousSeeking(bool synchronous);
+//		void                setSynchronousSeeking(bool synchronous);
 //		bool                getSynchronousSeeking();
 
 		void                draw(float x, float y, float w, float h);
