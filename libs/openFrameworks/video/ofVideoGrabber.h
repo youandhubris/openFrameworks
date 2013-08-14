@@ -5,6 +5,7 @@
 #include "ofBaseTypes.h"
 #include "ofPixels.h"
 #include "ofTypes.h"
+#include "ofVideoFrame.h"
 
 
 #ifdef OF_VIDEO_CAPTURE_IOS
@@ -61,6 +62,7 @@ class ofVideoGrabber : public ofBaseVideoGrabber,public ofBaseVideoDraws{
 		unsigned char 	*	getPixels();
 		ofPixels&			getPixelsRef();
 		ofTexture&			getTextureReference();
+		ofVideoFrame &		getVideoFrame();
 		
 		void				setVerbose(bool bTalkToMe);
 		void				setDeviceID(int _deviceID);

@@ -32,6 +32,7 @@ class ofPath;
 class ofPolyline;
 class ofFbo;
 class of3dPrimitive;
+class ofVideoFrame;
 typedef ofPixels& ofPixelsRef;
 
 bool ofIsVFlipped();
@@ -186,6 +187,8 @@ public:
 	
 	virtual void setPlaybackMode(ofVideoPlaybackMode playbackMode)=0;
 	virtual ofVideoPlaybackMode getPlaybackMode()=0;
+
+	virtual ofVideoFrame & getVideoFrame() = 0;
 };
 
 
@@ -249,7 +252,7 @@ public:
 	virtual bool 				isFrameNew() = 0;
 	virtual unsigned char * 	getPixels() = 0;
 	virtual ofTexture *			getTexture(){return NULL;}; // if your videoplayer needs to implement seperate texture and pixel returns for performance, implement this function to return a texture instead of a pixel array. see iPhoneVideoGrabber for reference
-	
+
 	virtual float 				getWidth() = 0;
 	virtual float 				getHeight() = 0;
 	

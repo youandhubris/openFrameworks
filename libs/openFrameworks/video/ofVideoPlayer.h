@@ -4,6 +4,7 @@
 #include "ofTexture.h"
 #include "ofBaseTypes.h"
 #include "ofTypes.h"
+#include "ofVideoFrame.h"
 
 #ifdef OF_VIDEO_PLAYER_GSTREAMER
 	#include "ofGstVideoPlayer.h"
@@ -57,6 +58,8 @@ class ofVideoPlayer : public ofBaseVideoPlayer,public ofBaseVideoDraws{
 		bool 				isFrameNew();
 		unsigned char * 	getPixels();
 		ofPixelsRef			getPixelsRef();
+		ofVideoFrame &		getVideoFrame();
+
 		float 				getPosition();
 		float 				getSpeed();
 		float 				getDuration();

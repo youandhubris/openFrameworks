@@ -164,10 +164,16 @@ void ofVideoGrabber::setUsePixels(bool bUsePix){
 	}
 }
 
-//------------------------------------
-//for getting a reference to the texture
+//---------------------------------------------------------------------------
 ofTexture & ofVideoGrabber::getTextureReference(){
 	return tex;
+}
+
+//---------------------------------------------------------------------------
+ofVideoFrame & ofVideoGrabber::getVideoFrame(){
+	if(	grabber != NULL ){
+		grabber->getVideoFrame();
+	}
 }
 
 //---------------------------------------------------------------------------
