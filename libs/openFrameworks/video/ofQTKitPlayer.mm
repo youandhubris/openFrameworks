@@ -10,9 +10,11 @@ ofQTKitPlayer::ofQTKitPlayer() {
     bPaused = true;
 	duration = 0.0f;
     speed = 1.0f;
+	
 	// default this to true so the player update behavior matches ofQuicktimePlayer
-	bSynchronousSeek = true;
-    
+//	bSynchronousSeek = true;
+    playbackMode = OF_VIDEO_PLAYBACK_FRAME_BY_FRAME;
+	
     pixelFormat = OF_PIXELS_RGB;
     currentLoopState = OF_LOOP_NORMAL;
 }
@@ -64,7 +66,7 @@ bool ofQTKitPlayer::loadMovie(string movieFilePath, ofQTKitDecodeMode mode) {
                                allowAlpha:useAlpha];
 	
 	if(success){
-		moviePlayer.synchronousSeek = bSynchronousSeek;
+		moviePlayer.synchronousSeek = playbackMode == OF_VIDEO_PLAYBACK_FRAME_BY_FRAME;
         reallocatePixels();
         moviePath = movieFilePath;
 		duration = moviePlayer.duration;
@@ -149,7 +151,7 @@ void ofQTKitPlayer::firstFrame(){
 
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     [moviePlayer gotoBeginning];
-	bHavePixelsChanged = bNewFrame = bSynchronousSeek;
+	bHavePixelsChanged = bNewFrame = playbackMode == OF_VIDEO_PLAYBACK_FRAME_BY_FRAME;
     [pool release];
 }
 
@@ -159,7 +161,7 @@ void ofQTKitPlayer::nextFrame(){
 
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     [moviePlayer stepForward];
-	bHavePixelsChanged = bNewFrame = bSynchronousSeek;
+	bHavePixelsChanged = bNewFrame = playbackMode == OF_VIDEO_PLAYBACK_FRAME_BY_FRAME;
     [pool release];
 }
 
@@ -169,7 +171,7 @@ void ofQTKitPlayer::previousFrame(){
 
     NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
     [moviePlayer stepBackward];
-	bHavePixelsChanged = bNewFrame = bSynchronousSeek;
+	bHavePixelsChanged = bNewFrame = playbackMode == OF_VIDEO_PLAYBACK_FRAME_BY_FRAME;
     [pool release];
     
 }
@@ -273,7 +275,7 @@ void ofQTKitPlayer::setPosition(float pct) {
     [moviePlayer setPosition:pct];
 	[pool release];
     
-    bHavePixelsChanged = bNewFrame = bSynchronousSeek;
+    bHavePixelsChanged = bNewFrame = playbackMode == OF_VIDEO_PLAYBACK_FRAME_BY_FRAME;
 }
 
 //--------------------------------------------------------------------
@@ -304,7 +306,7 @@ void ofQTKitPlayer::setFrame(int frame) {
     [moviePlayer setFrame:frame];
 	[pool release];
 
-	bHavePixelsChanged = bNewFrame = bSynchronousSeek;
+	bHavePixelsChanged = bNewFrame = playbackMode == OF_VIDEO_PLAYBACK_FRAME_BY_FRAME;
 }
 
 //--------------------------------------------------------------------
@@ -430,17 +432,31 @@ ofQTKitDecodeMode ofQTKitPlayer::getDecodeMode(){
 }
 
 //--------------------------------------------------------------------
-void ofQTKitPlayer::setSynchronousSeeking(bool synchronous){
-	bSynchronousSeek = synchronous;
+void ofQTKitPlayer::setPlaybackMode(ofVideoPlaybackMode playbackMode){
+	this->playbackMode = playbackMode;
     if(isLoaded()){
-        moviePlayer.synchronousSeek = synchronous;
+        moviePlayer.synchronousSeek = playbackMode == OF_VIDEO_PLAYBACK_FRAME_BY_FRAME;
     }
+	
 }
 
 //--------------------------------------------------------------------
-bool ofQTKitPlayer::getSynchronousSeeking(){
-	return 	bSynchronousSeek;
+ofVideoPlaybackMode ofQTKitPlayer::getPlaybackMode(){
+	return playbackMode;
 }
+
+////--------------------------------------------------------------------
+//void ofQTKitPlayer::setSynchronousSeeking(bool synchronous){
+//	bSynchronousSeek = synchronous;
+//    if(isLoaded()){
+//        moviePlayer.synchronousSeek = synchronous;
+//    }
+//}
+//
+////--------------------------------------------------------------------
+//bool ofQTKitPlayer::getSynchronousSeeking(){
+//	return 	bSynchronousSeek;
+//}
 
 //--------------------------------------------------------------------
 void ofQTKitPlayer::reallocatePixels(){

@@ -923,6 +923,14 @@ void ofQTKitGrabber::setVerbose(bool bTalkToMe){
 	//Now handled by ofLogVerbose()
 }
 
+void ofQTKitGrabber::setPlaybackMode(ofVideoPlaybackMode playbackMode){
+	this->playbackMode = playbackMode;
+}
+
+ofVideoPlaybackMode ofQTKitGrabber::getPlaybackMode(){
+	return playbackMode;
+}
+
 void ofQTKitGrabber::videoSettings(){
 	ofSystemAlertDialog("ofQTKitGrabber: Video Settings is not supported in 10.7+. Please compile against the 10.6 SDK for this feature.");
 }
