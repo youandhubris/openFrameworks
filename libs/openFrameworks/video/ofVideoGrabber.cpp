@@ -246,6 +246,15 @@ float ofVideoGrabber::getWidth(){
 	return (float)width;
 }
 
+void ofVideoGrabber::setPlaybackMode(ofVideoPlaybackMode playbackMode){
+	grabber->setPlaybackMode(playbackMode);
+}
+
+ofVideoPlaybackMode ofVideoGrabber::getPlaybackMode(){
+	return grabber->getPlaybackMode();
+}
+
+
 //----------------------------------------------------------
 bool ofVideoGrabber::isInitialized(){
 	return bInitialized;
