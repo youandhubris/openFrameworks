@@ -406,3 +406,18 @@ bool ofVideoPlayer::isPlaying(){
 	}
 	return false;
 }
+
+//----------------------------------------------------------
+void ofVideoPlayer::setPlaybackMode(ofVideoPlaybackMode playbackMode){
+	if(	player != NULL ){
+		player->setPlaybackMode(playbackMode);
+	}
+}
+
+//----------------------------------------------------------
+ofVideoPlaybackMode ofVideoPlayer::getPlaybackMode(){
+	if(	player != NULL ){
+		return player->getPlaybackMode();
+	}
+	return OF_VIDEO_PLAYBACK_ASYNCHRONOUS;
+}

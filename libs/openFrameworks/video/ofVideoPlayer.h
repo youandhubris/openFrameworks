@@ -30,6 +30,12 @@
 	#define OF_VID_PLAYER_TYPE ofxAndroidVideoPlayer
 #endif
 
+
+enum ofVideoPlaybackMode{
+	OF_VIDEO_PLAYBACK_ASYNCHRONOUS,
+	OF_VIDEO_PLAYBACK_FRAME_BY_FRAME
+};
+
 //---------------------------------------------
 class ofVideoPlayer : public ofBaseVideoPlayer,public ofBaseVideoDraws{
 
@@ -95,6 +101,10 @@ class ofVideoPlayer : public ofBaseVideoPlayer,public ofBaseVideoDraws{
 		bool				isPaused();
 		bool				isLoaded();
 		bool				isPlaying();
+
+
+		void				setPlaybackMode(ofVideoPlaybackMode playbackMode);
+		ofVideoPlaybackMode getPlaybackMode();
 
 		//this is kept as legacy to support people accessing width and height directly. 
 		int					height;
