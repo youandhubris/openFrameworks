@@ -33,7 +33,10 @@ class ofQTKitGrabber : public ofBaseVideoGrabber {
 		ofPixelsRef     getPixelsRef();
 		void            setVerbose(bool bTalkToMe);
 
-		vector <ofVideoDevice> listDevices(); 
+		void setPlaybackMode(ofVideoPlaybackMode playbackMode);
+		ofVideoPlaybackMode getPlaybackMode();
+
+		vector <ofVideoDevice> listDevices();
 		vector <string> & listAudioDevices();
 		vector <string> & listVideoDevices();
 
@@ -85,6 +88,8 @@ class ofQTKitGrabber : public ofBaseVideoGrabber {
 		int audioDeviceID;
 		string videoCodecIDString;
 		string audioCodecIDString;
+		
+		ofVideoPlaybackMode playbackMode;
 
 		bool isInited;
 		bool bUseAudio;

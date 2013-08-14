@@ -78,6 +78,7 @@ class ofQTKitPlayer  : public ofBaseVideoPlayer {
 		void                setSpeed(float speed);
 		void                setFrame(int frame); // frame 0 = first frame...
 		
+
         // ofQTKitPlayer only supports OF_PIXELS_RGB and OF_PIXELS_RGBA.
 		bool                setPixelFormat(ofPixelFormat pixelFormat);
 		ofPixelFormat       getPixelFormat();
@@ -91,9 +92,11 @@ class ofQTKitPlayer  : public ofBaseVideoPlayer {
         // Disabling synchronous seeking will result in a speed boost
         // during playback, but won't guarantee that frames are available
         // when seeking frames manually (i.e. asynchronously).
+		void setPlaybackMode(ofVideoPlaybackMode playbackMode);
+		ofVideoPlaybackMode getPlaybackMode();
     
-        void                setSynchronousSeeking(bool synchronous);
-		bool                getSynchronousSeeking();
+//        void                setSynchronousSeeking(bool synchronous);
+//		bool                getSynchronousSeeking();
 
 		void                draw(float x, float y, float w, float h);
 		void                draw(float x, float y);
@@ -122,11 +125,12 @@ class ofQTKitPlayer  : public ofBaseVideoPlayer {
 		float speed;
 		
         ofQTKitDecodeMode decodeMode;
-	    
+		ofVideoPlaybackMode playbackMode;
+	   
         string moviePath;
 		
-        bool bSynchronousSeek;
-		
+        //bool bSynchronousSeek;
+	
         // updateTexture() pulls texture data from the movie QTKit
         // renderer into our internal ofTexture.
 		void updateTexture();
